@@ -14,8 +14,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "cd ./src && nodemon ./ts-build/src/index.js",
-    "postbuild": "cp ./src/package.json ./dist/src/package.json && cd dist && npm install --only-production"
+    "watch": "nodemon ./dist/src/index.js",
+    "postbuild": "cp ./src/package.json ./dist/src/package.json && cd dist/src && npm install --only-production"
   },
   "repository": {
     "type": "git",
