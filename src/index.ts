@@ -4,12 +4,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get('/', async (req: Request, res: Response) => {
-  const data = await pageInfo('Yoruichi');
-  res.json({ data });
+  res.send('Hello!');
 });
 
-app.get('/data', (req: Request, res: Response) => {
-  res.send('Get Data');
+app.get('/characters/:character', async (req: Request, res: Response) => {
+  const data = await pageInfo(req.params.character);
+  res.json({ data });
 });
 
 app.listen(PORT, () => {
