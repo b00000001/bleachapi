@@ -2,13 +2,14 @@
 
 import * as cheerio from 'cheerio';
 import fetchPage from './axios';
+const noDescription = ['Yoruichi', 'Coyote'];
 const charname = {
-  first: 'Sosuke',
-  last: 'Aizen'
+  first: 'Coyote',
+  last: 'Starrk'
 };
 const pageInfo = async () => {
   try {
-    const { data }: any = await fetchPage('Sosuke Aizen');
+    const { data }: any = await fetchPage(`${charname.first} ${charname.last}`);
     const $ = cheerio.load(data);
     const pageInfo = {
       title: $('#firstHeading').text().replace(/\s\s+/g, ''),
@@ -17,7 +18,7 @@ const pageInfo = async () => {
         .replace(/\s\s+/g, ''),
       image: $('#mw-content-text img').attr('src'),
       description: `${
-        charname.first === 'Yoruichi'
+        noDescription.includes(charname.first)
           ? 'Not Available'
           : $(
               `#mw-content-text p:contains("${charname.first}"), #mw-content-text p:contains("${charname.last}")`
