@@ -2,10 +2,10 @@
 
 import * as cheerio from 'cheerio';
 import fetchPage from './axios';
-const noDescription = ['Yoruichi', 'Coyote'];
+const noDescription = ['Yoruichi', 'Coyote', 'Retsu', 'Ulquiorra'];
 const charname = {
-  first: 'Coyote',
-  last: 'Starrk'
+  first: 'Ulquiorra',
+  last: 'Cifer'
 };
 const pageInfo = async () => {
   try {
@@ -30,6 +30,9 @@ const pageInfo = async () => {
       powersandabilities: $(
         '#mw-content-text h3:contains("Powers & Abilities") ~ p, #mw-content-text h3:contains("Natural Abilities") ~ p, #mw-content-text h2:contains("Powers & Abilities") ~ p'
       )
+        .text()
+        .split(/\r?\n/),
+      appearance: $('#mw-content-text h2:contains("Appearance") ~ p:lt(3)')
         .text()
         .split(/\r?\n/)
     };
