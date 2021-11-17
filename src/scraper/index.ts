@@ -1,15 +1,44 @@
-// TODO: Fix fetchPage() import so that it will work.
-
 import * as cheerio from 'cheerio';
 import fetchPage from './axios';
 const noDescription = ['Yoruichi', 'Coyote', 'Retsu', 'Ulquiorra'];
-const charname = {
-  first: 'Ulquiorra',
-  last: 'Cifer'
-};
-const pageInfo = async () => {
+
+const pageInfo = async (selection: string) => {
+  let charname;
+  switch (selection) {
+    case 'Yoruichi':
+      charname = {
+        first: 'Yoruichi',
+        last: 'Shihoin'
+      };
+      break;
+    case 'Coyote':
+      charname = {
+        first: 'Coyote',
+        last: 'Stark'
+      };
+      break;
+    case 'Retsu':
+      charname = {
+        first: 'Retsu',
+        last: 'Unohana'
+      };
+      break;
+    case 'Ichigo':
+      charname = {
+        first: 'Kurosaki',
+        last: 'Ichigo'
+      };
+      break;
+    case 'Ulquiorra':
+      charname = {
+        first: 'Ulquiorra',
+        last: 'Cifer'
+      };
+  }
   try {
-    const { data }: any = await fetchPage(`${charname.first} ${charname.last}`);
+    const { data }: any = await fetchPage(
+      `${charname?.first} ${charname?.last}`
+    );
     const $ = cheerio.load(data);
     const pageInfo = {
       title: $('#firstHeading').text().replace(/\s\s+/g, ''),
@@ -18,15 +47,21 @@ const pageInfo = async () => {
         .replace(/\s\s+/g, ''),
       image: $('#mw-content-text img').attr('src'),
       description: `${
-        noDescription.includes(charname.first)
+        noDescription.includes(charname?.first)
           ? 'Not Available'
           : $(
-              `#mw-content-text p:contains("${charname.first}"), #mw-content-text p:contains("${charname.last}")`
+              `#mw-content-text p:contains("${charname?.first}"), #mw-content-text p:contains("${charname.last}")`
             )
               .first()
               .text()
               .replace(/\s\s+/g, '')
       }`,
+      race: $('.portable-infobox h3:contains("Race") + div').text(),
+      birthday: $('.portable-infobox h3:contains("Birthday") + div').text(),
+      gender: $('.portable-infobox h3:contains("Gender") + div').text(),
+      height: $('.portable-infobox h3:contains("Height") + div').text(),
+      weight: $('.portable-infobox h3:contains("Weight") + div').text(),
+      affiliation: $('h3:contains("Affiliation") + div').text(),
       powersandabilities: $(
         '#mw-content-text h3:contains("Powers & Abilities") ~ p, #mw-content-text h3:contains("Natural Abilities") ~ p, #mw-content-text h2:contains("Powers & Abilities") ~ p'
       )

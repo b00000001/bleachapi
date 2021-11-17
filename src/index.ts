@@ -4,11 +4,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get('/', async (req: Request, res: Response) => {
-  const data = await pageInfo();
-  res.json({
-    message: 'Hello World!!',
-    data
-  });
+  const data = await pageInfo('Yoruichi');
+  res.json({ data });
 });
 
 app.get('/data', (req: Request, res: Response) => {
