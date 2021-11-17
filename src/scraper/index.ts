@@ -1,16 +1,14 @@
+// TODO: Fix fetchPage() import so that it will work.
+
 import * as cheerio from 'cheerio';
 import fetchPage from './axios';
-import axios from 'axios';
-import { text } from 'express';
 const charname = {
-  first: 'Yoruichi',
-  last: `Shihoin`
+  first: 'Sosuke',
+  last: 'Aizen'
 };
 const pageInfo = async () => {
   try {
-    const { data }: any = await axios.get(
-      `https://bleach.fandom.com/wiki/${charname.first}_${charname.last}`
-    );
+    const { data }: any = await fetchPage();
     const $ = cheerio.load(data);
     const pageInfo = {
       title: $('#firstHeading').text().replace(/\s\s+/g, ''),
@@ -22,11 +20,9 @@ const pageInfo = async () => {
         charname.first === 'Yoruichi'
           ? 'Not Available'
           : $(
-              `#mw-content-text b:contains("${
-                charname.first || charname.last
-              }") ~ i ~ a`
+              `#mw-content-text p:contains("${charname.first}"), #mw-content-text p:contains("${charname.last}")`
             )
-              // .first()
+              .first()
               .text()
               .replace(/\s\s+/g, '')
       }`,
