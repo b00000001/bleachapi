@@ -8,7 +8,7 @@ const charname = {
 };
 const pageInfo = async () => {
   try {
-    const { data }: any = await fetchPage();
+    const { data }: any = await fetchPage('Sosuke Aizen');
     const $ = cheerio.load(data);
     const pageInfo = {
       title: $('#firstHeading').text().replace(/\s\s+/g, ''),
