@@ -1,6 +1,13 @@
 import * as cheerio from 'cheerio';
 import fetchPage from './axios';
-const noDescription = ['Yoruichi', 'Coyote', 'Retsu', 'Ulquiorra'];
+const noDescription = [
+  'Kenpachi',
+  'Yoruichi',
+  'Coyote',
+  'Retsu',
+  'Ulquiorra',
+  'Yhwach'
+];
 
 const pageInfo = async (selection: string) => {
   let charname;
@@ -33,6 +40,53 @@ const pageInfo = async (selection: string) => {
       charname = {
         first: 'Ulquiorra',
         last: 'Cifer'
+      };
+      break;
+    case 'Rukia':
+      charname = {
+        first: 'Rukia',
+        last: 'Kuchiki'
+      };
+    case 'Yhwach':
+      charname = {
+        first: 'Yhwach',
+        last: ''
+      };
+      break;
+    case 'Uryu':
+      charname = {
+        first: 'Uryu',
+        last: 'Ishida'
+      };
+      break;
+    case 'Karin':
+      charname = {
+        first: 'Karin',
+        last: 'Kurosaki'
+      };
+      break;
+    case 'Soul_King':
+      charname = {
+        first: 'Soul',
+        last: 'King'
+      };
+      break;
+    case 'Kenpachi':
+      charname = {
+        first: 'Kenpachi',
+        last: 'Zaraki'
+      };
+      break;
+    case 'Chad' || 'Yasutora' || 'Chado':
+      charname = {
+        first: 'Yasutora',
+        last: 'Sado'
+      };
+      break;
+    default:
+      charname = {
+        first: '',
+        last: ''
       };
   }
   try {
