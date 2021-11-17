@@ -3,12 +3,12 @@
 import * as cheerio from 'cheerio';
 import fetchPage from './axios';
 const charname = {
-  first: 'Sosuke',
-  last: 'Aizen'
+  first: 'Yoruichi',
+  last: 'Shihoin'
 };
 const pageInfo = async () => {
   try {
-    const { data }: any = await fetchPage('Sosuke Aizen');
+    const { data }: any = await fetchPage('Yoruichi Shihoin');
     const $ = cheerio.load(data);
     const pageInfo = {
       title: $('#firstHeading').text().replace(/\s\s+/g, ''),
@@ -16,16 +16,10 @@ const pageInfo = async () => {
         .text()
         .replace(/\s\s+/g, ''),
       image: $('#mw-content-text img').attr('src'),
-      description: `${
-        charname.first === 'Yoruichi'
-          ? 'Not Available'
-          : $(
-              `#mw-content-text p:contains("${charname.first}"), #mw-content-text p:contains("${charname.last}")`
-            )
-              .first()
-              .text()
-              .replace(/\s\s+/g, '')
-      }`,
+      description: $(`#mw-content-text p:contains("${charname.first}")`)
+        .first()
+        .text()
+        .replace(/\s\s+/g, ''),
       powersandabilities: $(
         '#mw-content-text h3:contains("Powers & Abilities") ~ p, #mw-content-text h3:contains("Natural Abilities") ~ p, #mw-content-text h2:contains("Powers & Abilities") ~ p'
       )
