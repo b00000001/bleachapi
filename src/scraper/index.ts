@@ -7,7 +7,8 @@ const noDescription = [
   'Coyote',
   'Retsu',
   'Ulquiorra',
-  'Yhwach'
+  'Yhwach',
+  'Orihime'
 ];
 
 const pageInfo = async (selection: string) => {

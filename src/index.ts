@@ -8,6 +8,7 @@ app.get('/', async (req: Request, res: Response) => {
 });
 
 app.get('/characters/:character', async (req: Request, res: Response) => {
+  console.log(req.params.character);
   const data = await pageInfo(req.params.character);
   res.json({ data });
 });
