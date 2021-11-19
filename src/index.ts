@@ -4,15 +4,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get('/', async (req: Request, res: Response) => {
-  const data = await pageInfo();
-  res.json({
-    message: 'Hello World!!',
-    data
-  });
+  res.send('Hello!');
 });
 
-app.get('/data', (req: Request, res: Response) => {
-  res.send('Get Data');
+app.get('/characters/:character', async (req: Request, res: Response) => {
+  console.log(req.params.character);
+  const data = await pageInfo(req.params.character);
+  res.json({ data });
 });
 
 app.listen(PORT, () => {
