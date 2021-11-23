@@ -24,6 +24,7 @@ const returnChar = (selection: string) => {
       break;
     case 'Ichigo':
       charname = {
+        human: true,
         first: 'Kurosaki',
         last: 'Ichigo'
       };
@@ -61,6 +62,7 @@ const returnChar = (selection: string) => {
       break;
     case 'Soul_King' || 'King':
       charname = {
+        arrancar: true,
         first: 'Soul',
         last: 'King'
       };
@@ -76,6 +78,7 @@ const returnChar = (selection: string) => {
     case 'Yasutora':
     case 'Chado':
       charname = {
+        human: true,
         first: 'Yasutora',
         last: 'Sado'
       };
@@ -104,12 +107,14 @@ const returnChar = (selection: string) => {
       break;
     case 'Grimmjow':
       charname = {
+        arrancar: true,
         first: 'Grimmjow',
         last: 'Jaegerjaquez'
       };
       break;
     case 'Nnoitra':
       charname = {
+        arrancar: true,
         first: 'Nnoitra',
         last: 'Gilga'
       };
@@ -117,6 +122,7 @@ const returnChar = (selection: string) => {
     case 'Szayel':
     case 'Szayelaporro':
       charname = {
+        arrancar: true,
         first: 'Szayelaporro',
         last: 'Granz'
       };
@@ -124,6 +130,7 @@ const returnChar = (selection: string) => {
     case 'Baraggan_Louisenbairn':
     case 'Baraggan':
       charname = {
+        arrancar: true,
         first: 'Baraggan',
         last: 'Louisenbairn'
       };
@@ -131,6 +138,7 @@ const returnChar = (selection: string) => {
     case 'Tier_Harribel':
     case 'Harribel':
       charname = {
+        arrancar: true,
         first: 'Tier',
         last: 'Harribel'
       };
@@ -146,6 +154,7 @@ const returnChar = (selection: string) => {
     case 'Nell':
     case 'Nelliel_Tu_Odelschwanck':
       charname = {
+        arrancar: true,
         first: 'Nelliel_Tu_',
         last: 'Odelschwanck'
       };
