@@ -69,10 +69,7 @@ const pageInfo = async (selection: string) => {
         previousposition: $('h3:contains("Previous Position") + div').text()
       }),
       ...(charname?.shinigami && {
-        previousdivision: $('h3:contains("Previous Division") + div').text()
-      }),
-      ...(charname?.shinigami && {
-        previousdivision: $('h3:contains("Previous Partner") + div').text()
+        previousdivision: $('h3:contains("Previous Partner") + div ~ a').text()
       }),
       baseofoperations: $('h3:contains("Base of Operations") + div').text(),
       zanpakuto: $('section:contains("Zanpakut") b').text(),
