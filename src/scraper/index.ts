@@ -75,7 +75,12 @@ const pageInfo = async (selection: string) => {
         previouspartner: $('h3:contains("Previous Partner") + div').text()
       }),
       baseofoperations: $('h3:contains("Base of Operations") + div').text(),
-      zanpakuto: $('section:contains("Zanpakut") b').text(),
+      ...(charname?.shinigami && {
+        shikai: $('h3:contains("Shikai") + div').text()
+      }),
+      ...(charname?.shinigami && {
+        bankai: $('h3:contains("Bankai") + div').text()
+      }),
       powersandabilities: $(
         '#mw-content-text h3:contains("Powers & Abilities") ~ p, #mw-content-text h3:contains("Natural Abilities") ~ p, #mw-content-text h2:contains("Powers & Abilities") ~ p'
       )

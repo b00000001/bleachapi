@@ -25,6 +25,7 @@ const returnChar = (selection: string) => {
     case 'Ichigo':
       charname = {
         human: true,
+        shinigami: true,
         first: 'Kurosaki',
         last: 'Ichigo'
       };
