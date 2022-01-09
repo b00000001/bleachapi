@@ -86,6 +86,7 @@ const pageInfo = async (selection: string) => {
       )
         .text()
         .split(/\r?\n/),
+      plot: $('h2:contains("Plot") ~ p').text(),
       appearance: $('#mw-content-text h2:contains("Appearance") ~ p:lt(3)')
         .text()
         .split(/\r?\n/)
