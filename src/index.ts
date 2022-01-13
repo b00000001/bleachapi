@@ -1,31 +1,28 @@
 import express, { Request, Response } from 'express';
+import fs from 'fs';
 import pageInfo from './scraper/index';
 import connection from './db/connection';
-const app = express();
+export const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get('/', async (req: Request, res: Response) => {
-  res.send('Hello!');
+app.get('/', (req, res) => {
+  res.json({ message: 'Hello!' });
 });
 
-connection.connect(() => {
-  console.log('Connected to database');
+// connection.connect(() => {
+//   console.log('Connected to database');
+// });
+
+app.get('/characters/:character', async (req, res) => {
+  const data = await pageInfo(req.params.character);
+  res.json(data);
+  fs.writeFileSync(
+    `${req.params.character}.json`,
+    JSON.stringify(data, null, 2),
+    'utf8'
+  );
 });
 
-app.get('/createDB', async (req: Request, res: Response) => {
-  connection.query(`CREATE DATABASE BleachAPI`, (err, result) => {
-    if (err) {
-      throw err;
-    }
-    res.send('Database created');
-  });
-  app.get('/characters/:character', async (req: Request, res: Response) => {
-    console.log(req.params.character);
-    const data = await pageInfo(req.params.character);
-    res.json({ data });
-  });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
