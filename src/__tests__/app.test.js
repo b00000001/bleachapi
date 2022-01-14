@@ -1,6 +1,34 @@
 const request = require('supertest');
 const { app } = require('../../dist/src/index.js');
 
+const names = [
+  'Yoruichi',
+  'Coyote',
+  'Retsu',
+  'Ichigo',
+  'Ulquiorra',
+  'Rukia',
+  'Yhwach',
+  'Uryu',
+  'Karin',
+  'Soul_King',
+  'Kenpachi',
+  'Chad',
+  'Kisuke',
+  'Orihime',
+  'Aizen',
+  'Grimmjow',
+  'Nnoitra',
+  'Szayel',
+  'Baraggan',
+  'Harribel',
+  'Hitsugaya',
+  'Nell',
+  'Renji',
+  'Yamamoto',
+  'Unohana'
+];
+
 describe('Test the root path', () => {
   test('It should respond to the GET method with JSON', (done) => {
     request(app)
@@ -51,4 +79,20 @@ describe('Ichigo route should return Ichigo Kurosaki in title', () => {
         done();
       });
   });
+});
+
+describe('Character route should return JSON', () => {
+  test.each(names)(
+    'It should respond to the /characters/:character route',
+    (name, done) => {
+      request(app)
+        .get(`/characters/${name}`)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+          done();
+        });
+    }
+  );
 });

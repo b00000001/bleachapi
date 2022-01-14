@@ -160,12 +160,12 @@ const returnChar = (selection: string) => {
         last: 'Odelschwanck'
       };
       break;
-    case 'Renji_Abari':
+    case 'Renji_Abarai':
     case 'Renji':
       charname = {
         shinigami: true,
         first: 'Renji',
-        last: 'Abari'
+        last: 'Abarai'
       };
       break;
     case 'Genryusai_Shigekuni_Yamamoto':
