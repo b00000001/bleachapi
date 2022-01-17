@@ -54,27 +54,14 @@ describe(`JSON returned should be 'Hello!'`, () => {
   });
 });
 
-describe('Ichigo route should return JSON', () => {
-  test('It should respond to the /characters/:character route', (done) => {
+describe('Character route should return character name in the title', () => {
+  test.each(names)('Title should be character name', () => {
     request(app)
-      .get('/characters/Ichigo')
-      .expect(200)
-      .expect('Content-Type', /json/)
-      .end((err, res) => {
-        if (err) return done(err);
-        done();
-      });
-  });
-});
-
-describe('Ichigo route should return Ichigo Kurosaki in title', () => {
-  test('Title should be Ichigo', (done) => {
-    request(app)
-      .get('/characters/Ichigo')
+      .get(`/characters/${names}`)
       .expect((res) => {
-        expect(res.body.title).toBe('Ichigo Kurosaki');
+        expect(res.body.title).toContain(names);
       })
-      .end((err, res) => {
+      .end((err, done) => {
         if (err) return done(err);
         done();
       });
@@ -84,12 +71,12 @@ describe('Ichigo route should return Ichigo Kurosaki in title', () => {
 describe('Character route should return JSON', () => {
   test.each(names)(
     'It should respond to the /characters/:character route',
-    (name, done) => {
+    () => {
       request(app)
-        .get(`/characters/${name}`)
+        .get(`/characters/${names}`)
         .expect(200)
         .expect('Content-Type', /json/)
-        .end((err, res) => {
+        .end((err, done) => {
           if (err) return done(err);
           done();
         });
